@@ -3,8 +3,10 @@ package com.example.sharedpreferences_20200526;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import com.example.sharedpreferences_20200526.databinding.ActivityMainBinding;
@@ -24,6 +26,13 @@ public class MainActivity extends BaseActivity {
     @Override
     public void setupEvents() {
 
+        binding.idSaveCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                ContextUtil.setIdSave(mContxt,isChecked);
+            }
+        });
+
         binding.loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -40,6 +49,8 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void setValues() {
+
+        binding.idSaveCheckBox.setChecked(ContextUtil.isIdSave(mContxt));
 
         binding.emailEdt.setText(ContextUtil.getUserId(mContxt));
 
