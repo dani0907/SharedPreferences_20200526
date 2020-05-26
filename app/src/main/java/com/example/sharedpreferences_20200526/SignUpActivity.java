@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import com.example.sharedpreferences_20200526.databinding.ActivitySignUpBinding;
 
@@ -26,6 +28,32 @@ public class SignUpActivity extends BaseActivity {
 
     @Override
     public void setupEvents() {
+
+        binding.nextBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int clickedRadioId = binding.workTypeRadioGroup.getCheckedRadioButtonId();
+
+                if(clickedRadioId == -1){
+                    Toast.makeText(mContxt, "아무 항목도 고르지 않았습니다.", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    if(clickedRadioId == R.id.fullTimeRadioBtn){
+                        Toast.makeText(mContxt, "풀타임", Toast.LENGTH_SHORT).show();
+                    }
+                    else if(clickedRadioId == R.id.partTimeRadioBtn){
+                        Toast.makeText(mContxt, "파트타임", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Log.d("오류","잘못된 선택지");
+                    }
+                }
+
+
+
+            }
+        });
 
 
 //        비밀번호 확인에 뭐라고 적히는지 타이핑 할 때마다 확인.
