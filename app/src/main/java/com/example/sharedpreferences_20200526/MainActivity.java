@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.sharedpreferences_20200526.databinding.ActivityMainBinding;
+import com.example.sharedpreferences_20200526.utils.ContextUtil;
 
 public class MainActivity extends BaseActivity {
 
@@ -28,17 +29,19 @@ public class MainActivity extends BaseActivity {
             public void onClick(View v) {
                 boolean isIdSave = binding.idSaveCheckBox.isChecked();
                 if(isIdSave){
-                    Toast.makeText(mContxt, "아이디 저장 필요", Toast.LENGTH_SHORT).show();
+                    String inputId = binding.emailEdt.getText().toString();
+
+                    ContextUtil.setUserId(mContxt, inputId);
                 }
-                else{
-                    Toast.makeText(mContxt, "아이디 저장 안 함", Toast.LENGTH_SHORT).show();
-                }
+
             }
         });
     }
 
     @Override
     public void setValues() {
+
+        binding.emailEdt.setText(ContextUtil.getUserId(mContxt));
 
     }
 }
